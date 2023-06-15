@@ -1,0 +1,27 @@
+.button {
+	border-radius: 4px;
+	padding: 8px 16px;
+	cursor: pointer;
+	border: 2px solid #6f42c1;
+	font-size: 14px;
+	line-height: 20px;
+	transition: all ease 0.4s;
+}
+
+.button.filled {
+	background-color: #6f42c1;
+	color: white;
+	&:hover {
+		background-color: #8f6ecc;
+		border: 2px solid #8f6ecc;
+	}
+}
+
+.button.outlined {
+	background-color: transparent;
+	color: #6f42c1;
+	&:hover {
+		background-color: #6f42c1;
+		color: white;
+	}
+}
