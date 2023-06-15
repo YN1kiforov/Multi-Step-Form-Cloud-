@@ -1,0 +1,27 @@
+@import "../../styles/formCommon.module.scss";
+
+.header {
+	display: flex;
+	align-items: center;
+	padding-bottom: 25px;
+	margin-bottom: 25px;
+	border-bottom: 1px solid rgba(#000000, 0.08);
+}
+
+.name {
+	font-size: 20px;
+}
+.list {
+	display: flex;
+	& li {
+		padding-left: 18px;
+		background: no-repeat left url("../../assets/Vector.jpg");
+		margin-right: 20px;
+		&:last-of-type {
+			margin-right: 0px;
+		}
+	}
+}
+button{
+	align-self: flex-end;
+}
