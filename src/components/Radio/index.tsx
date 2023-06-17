@@ -9,9 +9,11 @@ interface CheckboxGroupProps {
   label: string;
 }
 
-export const RadioGroup: React.FC<CheckboxGroupProps> = ({ name, children, label }) => {
+
+export const RadioGroup = ({ name, children, label }: CheckboxGroupProps) => {
   const [field, , helpers] = useField(name);
   const handleChange = (value: number) => {
+
     helpers.setValue(value)
   };
 
@@ -20,30 +22,29 @@ export const RadioGroup: React.FC<CheckboxGroupProps> = ({ name, children, label
       <label className={s.label}>{label}</label>
 
       {children.map((child) => (
-        React.cloneElement(child, {
-          name,
-          checked: field.value === child.props.value,
-          onChange: (value: number) => handleChange(value),
-        })
+        
+        <Radio
+          key={child.props.value}
+          name={name}
+          checked={field.value === child.props.value}
+          onChange={() => handleChange(child.props.value)}
+          {...child.props}
+        >
+          {child.props.children}
+        </Radio>
       ))}
     </>
   );
 };
 
 interface CheckboxProps {
-  name?: string;
   value: number;
-  label?: string;
-  onChange?: (value: number) => void
-  checked?: boolean;
   children: ReactNode;
 }
-
-export const Radio = ({ value, name, children, onChange, checked }: CheckboxProps) => {
+export const Radio = ({ value, children, ...props }: CheckboxProps) => {
 
   return <label className={s.radio}>
-    <input checked={checked} onChange={() => onChange && onChange(value)} type="radio" name={name} value={value} />
+    <input type="radio" value={value} {...props}/>
     {children}
-    <div className={s.check}></div>
   </label>
 };
