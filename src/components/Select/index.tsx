@@ -2,24 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useField } from 'formik';
 
 import s from './style.module.scss'
-
-interface OptionProps {
-  value: string;
-  label: string;
-  children: React.ReactNode;
-}
-
 interface SelectFieldProps {
   name: string;
-  children: React.ReactElement<OptionProps>[];
+  children: React.ReactElement[];
 }
 
-interface Option {
-  value: string;
-  label: React.ReactNode;
-}
-
-export const SelectField: React.FC<SelectFieldProps> = ({ name, children }) => {
+export const SelectField = ({ name, children }: SelectFieldProps) => {
   const [field, meta, helpers] = useField(name);
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
@@ -40,16 +28,11 @@ export const SelectField: React.FC<SelectFieldProps> = ({ name, children }) => {
     setIsOpen(false);
   };
 
-  const options: Option[] = children.map(child => ({
-    value: child.props.value,
-    label: child.props.children,
-  }));
-
   return (
     <div className={s.container} ref={selectRef}>
       <div className={`${s.select} ${isOpen ? s.open : ''}`} onClick={() => setIsOpen(!isOpen)}>
         {field.value ? (
-          options.find(option => option.value === field.value)?.label
+          children.find(option => option.props.value === field.value)?.props.children
         ) : (
           <span className={s.placeholder}>Выберите вариант</span>
         )}
@@ -57,14 +40,32 @@ export const SelectField: React.FC<SelectFieldProps> = ({ name, children }) => {
       </div>
       {isOpen && (
         <ul className={s.list}>
-          {options.map(option => (
-            <li key={option.value} onClick={() => handleOptionClick(option.value)}>
-              {option.label}
-            </li>
+          {children.map((child) => (
+            <Option
+              key={child.props.value}
+              onClick={() => handleOptionClick(child.props.value)}
+              {...child.props}
+            >
+              {child.props.children}
+            </Option>
           ))}
         </ul>
       )}
       {meta.touched && meta.error ? <div className={s.tip}>{meta.error}</div> : null}
     </div>
+  );
+};
+
+interface Option {
+  value: string;
+  children: React.ReactNode;
+}
+
+export const Option = ({ value, children, ...props }: Option) => {
+
+  return (
+    <li {...props}>
+      {children}
+    </li>
   );
 };
