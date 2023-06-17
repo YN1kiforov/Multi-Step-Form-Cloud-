@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { TextArea } from '../../components/Textarea/index';
 import { Button } from '../../components/Button';
-import { Modal } from '../../components/Modal';
+import { SuccessModal, FailedModal } from '../../components/Modal';
 import { Loader } from '../../components/Loader';
 
 import s from './style.module.scss'
@@ -45,8 +45,8 @@ export const Step3 = ({ onNext, onPrev }: Step) => {
       >
         {props => (
           <Form className={s.form} onSubmit={props.handleSubmit}>
-            <label htmlFor="email">About</label>
-            <TextArea maxLength={200} placeholder="about" name="about" type="text" label="Nickname"></TextArea>
+            <label>О себе</label>
+            <TextArea maxLength={200} placeholder="О себе" name="about" type="text"></TextArea>
             <div className={s.buttons}>
               <Button onClick={() => onPrev(props.values)} variant="outlined">Назад</Button>
               <Button disabled={isLoading} type="submit" variant="filled">Отправить</Button>
@@ -55,7 +55,10 @@ export const Step3 = ({ onNext, onPrev }: Step) => {
         )}
       </Formik>
       {isLoading && <Loader />}
-      {showModal && <Modal open={showModal} onClose={handleClose} title={modalTitle} isSuccess={isSuccess} />}
+      {isSuccess
+       ? <SuccessModal title={modalTitle} onClose={handleClose} open={showModal} />
+       : <FailedModal title={modalTitle} onClose={handleClose} open={showModal} />
+       }
     </>
   );
 }

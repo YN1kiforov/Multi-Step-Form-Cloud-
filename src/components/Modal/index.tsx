@@ -8,27 +8,14 @@ import s from './style.module.scss'
 
 interface ModalProps {
   title: string;
-  isSuccess: boolean;
   onClose: () => void;
   open: boolean;
-
 }
-interface IModal {
-  title: string;
-  onClose: () => void;
 
-}
-export const Modal: React.FC<ModalProps> = ({ isSuccess, open, onClose, title }) => {
+export const SuccessModal: React.FC<ModalProps> = ({ open, onClose, title }) => {
   if (!open) {
     return null;
   }
-
-  return (
-    isSuccess ? <SuccessModal onClose={onClose} title={title} /> : <FailedModal onClose={onClose} title='das' />
-  );
-};
-const SuccessModal: React.FC<IModal> = ({ onClose, title }) => {
-
   return (
     <div className={s.modal}>
       <div className={s.content}>
@@ -39,20 +26,30 @@ const SuccessModal: React.FC<IModal> = ({ onClose, title }) => {
     </div>
   );
 };
-const FailedModal: React.FC<IModal> = ({ onClose, title }) => {
+export const FailedModal: React.FC<ModalProps> = ({ open, onClose, title }) => {
+
+
   const modalRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         onClose();
       }
-    };
-    document.addEventListener('click', handleOutsideClick);
 
+    };
+    if (open) {
+      document.addEventListener('click', handleOutsideClick);
+    } else {
+      document.removeEventListener('click', handleOutsideClick);
+    }
     return () => {
       document.removeEventListener('click', handleOutsideClick);
     };
-  }, [onClose]);
+  }, [onClose, open]);
+  if (!open) {
+    return null;
+  }
   return (
     <div className={s.modal} >
       <div className={s.content} ref={modalRef}>
