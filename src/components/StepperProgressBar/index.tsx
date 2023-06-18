@@ -43,8 +43,6 @@ function StepperDot({ dotIndex, currentStep }: StepperDotProps) {
   }
 
   return (
-
-    <div className={`${s.dot} ${s[status]}`}></div>
-
+    <div className={`${s.dot} ${s[status]}`}> </div>
   )
 }

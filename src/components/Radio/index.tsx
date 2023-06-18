@@ -11,7 +11,7 @@ interface CheckboxGroupProps {
 
 
 export const RadioGroup = ({ name, children, label }: CheckboxGroupProps) => {
-  const [field, , helpers] = useField(name);
+  const [field, meta, helpers] = useField(name);
   const handleChange = (value: number) => {
 
     helpers.setValue(value)
@@ -22,7 +22,7 @@ export const RadioGroup = ({ name, children, label }: CheckboxGroupProps) => {
       <label className={s.label}>{label}</label>
 
       {children.map((child) => (
-        
+
         <Radio
           key={child.props.value}
           name={name}
@@ -33,18 +33,22 @@ export const RadioGroup = ({ name, children, label }: CheckboxGroupProps) => {
           {child.props.children}
         </Radio>
       ))}
+      {meta.touched && meta.error ? (
+        <div className={s.tip}>{meta.error}</div>
+      ) : null}
     </>
   );
 };
 
 interface CheckboxProps {
+  id?: string,
   value: number;
   children: ReactNode;
 }
 export const Radio = ({ value, children, ...props }: CheckboxProps) => {
 
   return <label className={s.radio}>
-    <input type="radio" value={value} {...props}/>
+    <input type="radio" value={value} {...props} />
     {children}
   </label>
 };

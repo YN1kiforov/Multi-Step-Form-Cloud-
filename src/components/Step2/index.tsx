@@ -1,16 +1,23 @@
-import { FieldArray, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
 
-import { AdvantagesForm } from '../../components/Advantages/index';
-import { RadioGroup, Radio } from '../../components/Radio/index';
-import { CheckboxGroup, Checkbox } from '../../components/Checkbox/index';
+import { AdvantagesForm } from '../../components/Advantages';
+import { RadioGroup, Radio } from '../../components/Radio';
+import { CheckboxGroup, Checkbox } from '../../components/Checkbox';
 import { Button } from '../../components/Button';
 import { RootState } from '../../redux/store'
 import s from './style.module.scss'
 import { Step } from '../../commonTypes';
 
-const Schema = Yup.object().shape({});
+const Schema = Yup.object().shape({
+
+  radio: Yup.string()
+    .required('Обязательное поле'),
+  checkbox: Yup.array()
+    .test('is-non-empty', 'Обязательное поле', (value) => value && !!value.length),
+});
+
 
 export const Step2 = ({ onNext, onPrev }: Step) => {
 
@@ -21,7 +28,6 @@ export const Step2 = ({ onNext, onPrev }: Step) => {
   }))
   return (
     <Formik
-
       initialValues={initialValues}
       validationSchema={Schema}
       onSubmit={(values) => {
@@ -30,24 +36,22 @@ export const Step2 = ({ onNext, onPrev }: Step) => {
     >
       {props => (
         <Form className={s.form} onSubmit={props.handleSubmit}>
-          <label className={s.label}>Advantages</label>
-          <FieldArray name="advantages">
-            {() => <AdvantagesForm />}
-          </FieldArray>
+          <label className={s.label}>Преимущества</label>
+          <AdvantagesForm />
 
           <CheckboxGroup label="Checkbox group" name="checkbox" >
-            <Checkbox value={1}>1</Checkbox>
-            <Checkbox value={2}>2</Checkbox>
-            <Checkbox value={3}>3</Checkbox>
+            <Checkbox id="field-checkbox-group-option-1" value={1}>1</Checkbox>
+            <Checkbox id="field-checkbox-group-option-2" value={2}>2</Checkbox>
+            <Checkbox id="field-checkbox-group-option-3" value={3}>3</Checkbox>
           </CheckboxGroup>
           <RadioGroup label="Radio group" name="radio">
-            <Radio value={1}>1</Radio>
-            <Radio value={2}>2</Radio>
-            <Radio value={3}>3</Radio>
+            <Radio id="field-radio-group-option-1" value={1}>1</Radio>
+            <Radio id="field-radio-group-option-2" value={2}>2</Radio>
+            <Radio id="field-radio-group-option-3" value={3}>3</Radio>
           </RadioGroup>
           <div className={s.buttons}>
-            <Button onClick={() => onPrev(props.values)} variant="outlined">Назад</Button>
-            <Button type="submit" variant="filled">Вперед</Button>
+            <Button id="button-back" onClick={() => onPrev(props.values)} variant="outlined">Назад</Button>
+            <Button id="button-next" type="submit" variant="filled">Вперед</Button>
           </div>
         </Form>
       )}

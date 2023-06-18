@@ -10,18 +10,25 @@
 
 .name {
 	font-size: 20px;
+	word-wrap: break-word;
 }
 .list {
 	display: flex;
+	flex-wrap: wrap;
 	& li {
 		padding-left: 18px;
 		background: no-repeat left url("../../assets/Vector.jpg");
 		margin-right: 20px;
+		line-height: 133%;
 		&:last-of-type {
 			margin-right: 0px;
 		}
+		& a {
+			color: blue;
+			font-size: 12px;
+		}
 	}
 }
-button{
-	align-self: flex-end;
+.button {
+	margin-top: 48px;
 }

@@ -1,5 +1,4 @@
 .input {
-	width: 400px;
 	padding: 12px;
 	border: 1px solid rgba(0, 0, 0, 0.16);
 	border-radius: 4px;
@@ -18,7 +17,9 @@
 	flex-direction: column;
 	margin-top: 24px;
 	font-size: 14px;
-	line-height: 20px; 
+	line-height: 20px;
+	max-width: 400px;
+	width: 100%; 
 	&:first-of-type {
 		margin-top: 0px;
 	}

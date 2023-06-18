@@ -10,4 +10,12 @@
 	font-weight: 400;
 	font-size: 40px;
 	line-height: 52px;
+	flex-shrink: 0;
+	@media (max-width: 480px) {
+		width: 60px;
+		height: 60px;
+		font-size: 30px;
+		line-height: 130%;
+
+	}
 }

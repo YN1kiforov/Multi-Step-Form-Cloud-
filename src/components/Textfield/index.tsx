@@ -14,6 +14,6 @@ export const TextField = ({ label, ...props }: { label: string } & FieldAttribut
         <div className={s.tip}>{meta.error}</div>
       ) : null}
     </>
-  
-  ); 
+
+  );
 };

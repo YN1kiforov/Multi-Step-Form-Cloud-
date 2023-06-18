@@ -7,12 +7,12 @@ interface TextAreaProps extends FieldAttributes<any> {
   maxLength: number;
 }
 
-export const TextArea: React.FC<TextAreaProps> = ({ name, maxLength, ...props }) => {
+export const TextArea = ({ name, maxLength, ...props }: TextAreaProps) => {
   const [field] = useField(name);
 
   const getCharacterCount = (value: string) => {
-    const trimmedText = value.toString().replace(/\s/g, ''); 
-    return trimmedText.length;
+    const textWithoutSpace = value.toString().replace(/\s/g, '');
+    return textWithoutSpace.length;
   };
 
   return (

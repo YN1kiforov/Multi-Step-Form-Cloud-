@@ -4,7 +4,6 @@ import { RootState, store } from '../store';
 export const fetchData = createAsyncThunk('user/fetchData', async (_, thunkAPI) => {
 	const data = (thunkAPI.getState() as RootState).user;
 	const response = await axios.post('/', data)
-
 	return response.data
 });
 
@@ -24,8 +23,8 @@ const initialState: UsersState = {
 	nickname: '',
 	name: '',
 	sername: '',
-	phone: '',
-	email: '',
+	phone: '+7 (913) 590-10-34',
+	email: 'yakov.nikiforov.1@gmail.com',
 	sex: undefined,
 	advantages: ['', '', ''],
 	radio: undefined,

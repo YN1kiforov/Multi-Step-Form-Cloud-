@@ -34,11 +34,15 @@ export const CheckboxGroup = ({ name, children, label }: CheckboxGroupProps) => 
           {child.props.children}
         </Checkbox>
       ))}
+      {meta.touched && meta.error ? (
+        <div className={s.tip}>{meta.error}</div>
+      ) : null}
     </>
   );
 };
 
 interface CheckboxProps {
+  id?: string,
   value: number;
   children: ReactNode;
 }

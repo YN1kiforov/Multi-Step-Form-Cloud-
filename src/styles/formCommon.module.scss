@@ -12,9 +12,20 @@
 	flex-direction: column;
 	margin-top: 24px;
 	font-size: 14px;
-	line-height: 20px; 
+	line-height: 20px;
+
 	&:first-of-type {
 		margin-top: 0px;
 	}
 	color: #292727;
+}
+
+input[type=checkbox],input[type=radio]{
+	margin-right: 8px;
+}
+.tip {
+	font-size: 12px;
+	line-height: 16px;
+	color: red;
+	margin-top: 8px;
 }

@@ -3,12 +3,13 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { TextField } from '../../components/Textfield';
 import { Avatar } from '../../components/Avatar';
 import { Button } from '../../components/Button';
 import { updateUserData, AppDispatch } from '../../redux/slices/userSlice';
+import { RootState } from 'redux/store';
 
 import s from './style.module.scss'
 
@@ -32,14 +33,18 @@ function InputMaskField({ field, form, ...props }: any) {
 			}}
 			alwaysShowMask={true}
 		>
-			{(inputProps: any) => <TextField {...inputProps} />}
+			{(inputProps: any) => <TextField {...props}  {...inputProps} />}
 		</InputMask>
 	);
 }
 export const Home = () => {
 	const navigate = useNavigate();
 	const dispatch: AppDispatch = useDispatch();
+	const initialValues = useSelector((state: RootState) => ({
+		phone: state.user.phone,
+		email: state.user.email,
 
+	}))
 	return (
 		<div className="container">
 			<div className={s.header}>
@@ -54,7 +59,7 @@ export const Home = () => {
 				</div>
 			</div>
 			<Formik
-				initialValues={{ phone: "", email: "" }}
+				initialValues={initialValues}
 				validationSchema={Schema}
 				onSubmit={(values) => {
 					dispatch(updateUserData(values));
@@ -71,8 +76,10 @@ export const Home = () => {
 							mask="+7 (999) 999-99-99"
 							type="tel"
 						/>
-						<TextField placeholder="tim.jennings@example.com" name="email" type="text" label="Email" />
-						<Button type="submit" variant="filled">Начать</Button>
+						<TextField placeholder="tim.jennings@example.com" name="email" type="text" label="Email" disabled={true} />
+						<div className={s.button}>
+							<Button id="button-start" type="submit" variant="filled">Начать</Button>
+						</div>
 					</Form>
 				)}
 			</Formik>

@@ -26,7 +26,7 @@ export const Step3 = ({ onNext, onPrev }: Step) => {
     <>
       <Formik
         initialValues={initialValues}
-        onSubmit={async (values) => {
+        onSubmit={async(values) => {
           onNext(values)
           try {
             setIsLoading(true)
@@ -46,19 +46,19 @@ export const Step3 = ({ onNext, onPrev }: Step) => {
         {props => (
           <Form className={s.form} onSubmit={props.handleSubmit}>
             <label>О себе</label>
-            <TextArea maxLength={200} placeholder="О себе" name="about" type="text"></TextArea>
+            <TextArea id="field-about" maxLength={200} placeholder="О себе" name="about" type="text"/>
             <div className={s.buttons}>
-              <Button onClick={() => onPrev(props.values)} variant="outlined">Назад</Button>
-              <Button disabled={isLoading} type="submit" variant="filled">Отправить</Button>
+              <Button id="button-back" onClick={() => onPrev(props.values)} variant="outlined">Назад</Button>
+              <Button id="button-send" disabled={isLoading} type="submit" variant="filled">Отправить</Button>
             </div>
           </Form>
         )}
       </Formik>
       {isLoading && <Loader />}
       {isSuccess
-       ? <SuccessModal title={modalTitle} onClose={handleClose} open={showModal} />
-       : <FailedModal title={modalTitle} onClose={handleClose} open={showModal} />
-       }
+        ? <SuccessModal title={modalTitle} onClose={handleClose} open={showModal} />
+        : <FailedModal title={modalTitle} onClose={handleClose} open={showModal} />
+      }
     </>
   );
 }
