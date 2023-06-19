@@ -13,7 +13,7 @@ import { Step } from '../../commonTypes';
 
 const Schema = Yup.object().shape({
   nickname: Yup.string()
-    .matches(/^[a-zA-Z0-9]+$/, 'Можно использовать только буквы и цифры')
+    .matches(/^[a-zA-Z0-9]+$/, 'Можно использовать только латинские буквы и цифры')
     .max(30, 'Максимальная длина 30 символов')
     .required('Обязательное поле'),
   name: Yup.string()
