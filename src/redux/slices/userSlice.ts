@@ -40,6 +40,12 @@ const userSlice = createSlice({
 			Object.assign(state, payload)
 		},
 	},
+	extraReducers: (builder) => {
+		// Очистка формы после отправки запроса
+		builder.addCase(fetchData.fulfilled, (state) => {
+			Object.assign(state, initialState)
+		});
+	},
 });
 export const { updateUserData } = userSlice.actions;
 
