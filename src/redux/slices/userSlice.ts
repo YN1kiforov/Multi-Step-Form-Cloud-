@@ -1,10 +1,17 @@
 import { createSlice, createAsyncThunk, ThunkAction, Action } from '@reduxjs/toolkit';
-import axios from '../../axios';
 import { RootState, store } from '../store';
 export const fetchData = createAsyncThunk('user/fetchData', async (_, thunkAPI) => {
 	const data = (thunkAPI.getState() as RootState).user;
-	const response = await axios.post('/', data)
-	return response.data
+	const response = await fetch('https://api.sbercloud.ru/content/v1/bootcamp/frontend', {
+		method: 'POST',
+		body: JSON.stringify(data),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	});
+
+	const responseData = await response.json();
+	return responseData;
 });
 
 interface UsersState {
@@ -20,16 +27,16 @@ interface UsersState {
 	about: string,
 }
 const initialState: UsersState = {
-	nickname: '',
-	name: '',
-	sername: '',
+	nickname: 's',
+	name: 's',
+	sername: 's',
 	phone: '+7 (913) 590-10-34',
 	email: 'yakov.nikiforov.1@gmail.com',
 	sex: undefined,
 	advantages: ['', '', ''],
 	radio: undefined,
 	checkbox: [],
-	about: '',
+	about: 's',
 }
 const userSlice = createSlice({
 	name: 'user',
@@ -37,7 +44,7 @@ const userSlice = createSlice({
 	reducers: {
 		updateUserData: (state, action) => {
 			const { payload } = action;
-			return {...state, ...payload}
+			return { ...state, ...payload }
 		},
 	},
 	extraReducers: (builder) => {
