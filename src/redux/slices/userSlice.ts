@@ -37,13 +37,13 @@ const userSlice = createSlice({
 	reducers: {
 		updateUserData: (state, action) => {
 			const { payload } = action;
-			Object.assign(state, payload)
+			return {...state, ...payload}
 		},
 	},
 	extraReducers: (builder) => {
 		// Очистка формы после отправки запроса
-		builder.addCase(fetchData.fulfilled, (state) => {
-			Object.assign(state, initialState)
+		builder.addCase(fetchData.fulfilled, () => {
+			return initialState
 		});
 	},
 });
