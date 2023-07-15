@@ -2,7 +2,7 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
 
-import { TextField } from '../../components/Textfield';
+import { FormikTextField } from '../FormikTextField';
 import { SelectField, Option } from '../../components/Select/index';
 import { Button } from '../../components/Button';
 import { RootState } from '../../redux/store'
@@ -47,9 +47,9 @@ export const Step1 = ({ onNext, onPrev }: Step) => {
     >
       {props => (
         <Form className={s.form} onSubmit={props.handleSubmit}>
-          <TextField id="field-nickname" placeholder="nickname" name="nickname" type="text" label="Nickname" />
-          <TextField id="field-name" placeholder="Иван" name="name" type="text" label="Имя" />
-          <TextField id="field-sername" placeholder="Иванов" name="sername" type="text" label="Фамилия" />
+          <FormikTextField id="field-nickname" placeholder="nickname" name="nickname" type="text" label="Nickname" />
+          <FormikTextField id="field-name" placeholder="Иван" name="name" type="text" label="Имя" />
+          <FormikTextField id="field-sername" placeholder="Иванов" name="sername" type="text" label="Фамилия" />
           <label className={s.label}>пол</label>
           <SelectField id="field-sex" name="sex">
             <Option id="field-sex-option-man" value="man">мужской</Option>

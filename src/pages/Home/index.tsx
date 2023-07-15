@@ -5,7 +5,7 @@ import InputMask from 'react-input-mask';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { TextField } from '../../components/Textfield';
+import { FormikTextField } from '../../components/FormikTextField';
 import { Avatar } from '../../components/Avatar';
 import { Button } from '../../components/Button';
 import { updateUserData, AppDispatch } from '../../redux/slices/userSlice';
@@ -33,7 +33,7 @@ function InputMaskField({ field, form, ...props }: any) {
 			}}
 			alwaysShowMask={true}
 		>
-			{(inputProps: any) => <TextField {...props}  {...inputProps} />}
+			{(inputProps: any) => <FormikTextField {...props}  {...inputProps} />}
 		</InputMask>
 	);
 }
@@ -75,8 +75,9 @@ export const Home = () => {
 							component={InputMaskField}
 							mask="+7 (999) 999-99-99"
 							type="tel"
+							disabled
 						/>
-						<TextField placeholder="tim.jennings@example.com" name="email" type="text" label="Email" disabled={true} />
+						<FormikTextField placeholder="tim.jennings@example.com" name="email" type="text" label="Email" disabled={true} />
 						<div className={s.button}>
 							<Button id="button-start" type="submit" variant="filled">Начать</Button>
 						</div>
