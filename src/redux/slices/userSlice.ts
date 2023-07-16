@@ -27,16 +27,16 @@ interface UsersState {
 	about: string,
 }
 const initialState: UsersState = {
-	nickname: 's',
-	name: 's',
-	sername: 's',
+	nickname: '',
+	name: '',
+	sername: '',
 	phone: '+7 (913) 590-10-34',
 	email: 'yakov.nikiforov.1@gmail.com',
 	sex: undefined,
 	advantages: ['', '', ''],
 	radio: undefined,
 	checkbox: [],
-	about: 's',
+	about: '',
 }
 const userSlice = createSlice({
 	name: 'user',
@@ -48,7 +48,7 @@ const userSlice = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
-		// Очистка формы после отправки запроса
+		// Очистка формы после успешного запроса
 		builder.addCase(fetchData.fulfilled, () => {
 			return initialState
 		});
