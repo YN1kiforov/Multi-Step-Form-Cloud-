@@ -47,9 +47,9 @@ export const Step1 = ({ onNext, onPrev }: Step) => {
     >
       {props => (
         <Form className={s.form} onSubmit={props.handleSubmit}>
-          <FormikTextField id="field-nickname" placeholder="nickname" name="nickname" type="text" label="Nickname" />
-          <FormikTextField id="field-name" placeholder="Иван" name="name" type="text" label="Имя" />
-          <FormikTextField id="field-sername" placeholder="Иванов" name="sername" type="text" label="Фамилия" />
+          <FormikTextField placeholder="nickname" name="nickname" type="text" label="Nickname" />
+          <FormikTextField placeholder="Иван" name="name" type="text" label="Имя" />
+          <FormikTextField placeholder="Иванов" name="sername" type="text" label="Фамилия" />
           <label className={s.label}>пол</label>
           <SelectField id="field-sex" name="sex">
             <Option id="field-sex-option-man" value="man">мужской</Option>
