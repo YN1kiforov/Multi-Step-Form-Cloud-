@@ -11,6 +11,7 @@ import s from './style.module.scss'
 import { AppDispatch, fetchData } from '../../redux/slices/userSlice';
 import { Step } from '../../commonTypes';
 import { RootState } from 'redux/store';
+import { createPortal } from 'react-dom';
 
 export const Step3 = ({ onNext, onPrev }: Step) => {
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +27,7 @@ export const Step3 = ({ onNext, onPrev }: Step) => {
     <>
       <Formik
         initialValues={initialValues}
-        onSubmit={async(values) => {
+        onSubmit={async (values) => {
           onNext(values)
           try {
             setIsLoading(true)
@@ -46,7 +47,7 @@ export const Step3 = ({ onNext, onPrev }: Step) => {
         {props => (
           <Form className={s.form} onSubmit={props.handleSubmit}>
             <label>О себе</label>
-            <TextArea id="field-about" maxLength={200} placeholder="О себе" name="about" type="text"/>
+            <TextArea id="field-about" maxLength={200} placeholder="О себе" name="about" type="text" />
             <div className={s.buttons}>
               <Button id="button-back" onClick={() => onPrev(props.values)} variant="outlined">Назад</Button>
               <Button id="button-send" disabled={isLoading} type="submit" variant="filled">Отправить</Button>
@@ -55,10 +56,14 @@ export const Step3 = ({ onNext, onPrev }: Step) => {
         )}
       </Formik>
       {isLoading && <Loader />}
-      {isSuccess
-        ? <SuccessModal title={modalTitle} onClose={handleClose} open={showModal} />
-        : <FailedModal title={modalTitle} onClose={handleClose} open={showModal} />
-      }
+      {createPortal(
+        isSuccess
+          ? <SuccessModal title={modalTitle} onClose={handleClose} open={showModal} />
+          : <FailedModal title={modalTitle} onClose={handleClose} open={showModal} />
+        ,
+        document.body
+      )}
+
     </>
   );
 }
