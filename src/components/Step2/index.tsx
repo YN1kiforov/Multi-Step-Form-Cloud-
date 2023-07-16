@@ -14,6 +14,9 @@ const Schema = Yup.object().shape({
 
   radio: Yup.string()
     .required('Обязательное поле'),
+  advantages: Yup.array().of(
+    Yup.string().required('Заполните все поля')
+  ),
   checkbox: Yup.array()
     .test('is-non-empty', 'Обязательное поле', (value) => value && !!value.length),
 });
