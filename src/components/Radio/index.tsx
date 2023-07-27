@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { useField } from 'formik';
+import { ErrorMessage } from '../ErrorMessage';
 
 import s from './style.module.scss'
 
@@ -20,9 +21,7 @@ export const RadioGroup = ({ name, children, label }: CheckboxGroupProps) => {
   return (
     <>
       <label className={s.label}>{label}</label>
-
       {children.map((child) => (
-
         <Radio
           key={child.props.value}
           name={name}
@@ -33,9 +32,7 @@ export const RadioGroup = ({ name, children, label }: CheckboxGroupProps) => {
           {child.props.children}
         </Radio>
       ))}
-      {meta.touched && meta.error ? (
-        <div className={s.tip}>{meta.error}</div>
-      ) : null}
+      <ErrorMessage show={!!meta.touched && !!meta.error}>{meta.error}</ErrorMessage>
     </>
   );
 };

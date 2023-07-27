@@ -10,7 +10,7 @@ import { Avatar } from '../../components/Avatar';
 import { Button } from '../../components/Button';
 import { updateUserData, AppDispatch } from '../../redux/slices/userSlice';
 import { RootState } from 'redux/store';
-
+import {ErrorMessage} from '../../components/ErrorMessage'
 import s from './style.module.scss'
 
 const Schema = Yup.object().shape({

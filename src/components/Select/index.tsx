@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useField } from 'formik';
+import { ErrorMessage } from '../ErrorMessage';
 
 import s from './style.module.scss'
 interface SelectFieldProps {
@@ -55,7 +56,8 @@ export const SelectField = ({ id, name, children }: SelectFieldProps) => {
         )}
 
       </div>
-      {meta.touched && meta.error ? <div className={s.tip}>{meta.error}</div> : null}
+      <ErrorMessage show={!!meta.touched && !!meta.error}>{meta.error}</ErrorMessage>
+
     </>
   );
 };

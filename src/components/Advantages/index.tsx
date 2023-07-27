@@ -3,6 +3,7 @@ import { Button } from '../../components/Button';
 import { useField } from 'formik';
 
 import s from './style.module.scss'
+import { ErrorMessage } from '../../components/ErrorMessage';
 
 
 export const AdvantagesForm = () => {
@@ -33,7 +34,8 @@ export const AdvantagesForm = () => {
         </div>
       ))}
       <Button id="button-add" type="button" variant="outlined" className={s.button} onClick={addAdvantage}>+</Button>
-      {meta.error && <div className='tip'>Заполните все поля!</div>}
+      <ErrorMessage show={!!meta.error}>Заполните все поля!</ErrorMessage>
+
     </div>
   );
 }

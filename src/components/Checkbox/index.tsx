@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { useField } from 'formik';
 
 import s from './style.module.scss'
+import { ErrorMessage } from '../ErrorMessage';
 
 interface CheckboxGroupProps {
   name: string;
@@ -34,9 +35,7 @@ export const CheckboxGroup = ({ name, children, label }: CheckboxGroupProps) => 
           {child.props.children}
         </Checkbox>
       ))}
-      {meta.touched && meta.error ? (
-        <div className={s.tip}>{meta.error}</div>
-      ) : null}
+      <ErrorMessage show={!!meta.touched && !!meta.error}>{meta.error}</ErrorMessage>
     </>
   );
 };
