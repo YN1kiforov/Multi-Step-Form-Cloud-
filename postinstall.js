@@ -1,6 +1,3 @@
-// Добавить загрузки при ожидании
-// Добавить
-
 const readline = require('readline');
 const fs = require('fs');
 const { promisify } = require('util');
@@ -37,7 +34,7 @@ async function updateDependencies(packageJson, outdatedDependencies) {
 
   if (answer === 'y') {
     outdatedDependencies.forEach((dep) => {
-      packageJson.dependencies[dep.name] = `^${dep.latest}`;
+      packageJson.dependencies[dep.name] = `${dep.latest}`;
     });
     writePackageJson(packageJson);
     console.log('Зависимости успешно обновлены!');
@@ -86,3 +83,35 @@ async function postinstall() {
 }
 
 postinstall();
+
+
+// (function script(){
+//   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath))
+
+// })()
+
+// const readline = require('readline');
+
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
+
+// function askPermission() {
+//   return new Promise((resolve) => {
+//     rl.question('Хотите ли вы продолжить установку зависимостей? (yes/no): ', (answer) => {
+//       rl.close();
+//       resolve(answer.toLowerCase() === 'yes');
+//     });
+//   });
+// }
+
+// async function checkPermission() {
+//   const permission = await askPermission();
+//   if (!permission) {
+//     console.log('Установка зависимостей отменена.');
+//     process.exit(0);
+//   }
+// }
+
+// checkPermission();
